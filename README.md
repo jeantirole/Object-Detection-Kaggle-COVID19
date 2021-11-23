@@ -45,8 +45,7 @@
             
     
 4. Layer 
-    - ...
-    - ...
+    - EfficientNet + (GlobalAveragePooling, Dense w/ softmax)
     
 5. Ensemble 
     - 5개 EfficientNet Ensemble 사용
