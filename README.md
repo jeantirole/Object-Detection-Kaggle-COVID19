@@ -45,12 +45,47 @@
             
     
 4. Layer 
-    - ...
-    - ...
+    - **EfficientNet** + **(GlobalAveragePooling, Dense w/ softmax)**
+
+    ```python
+    tf.keras.layers.GlobalAveragePooling2D(),
+    tf.keras.layers.Dense(n_labels, activation='softmax')
+    ```
     
 5. Ensemble 
-    - ...
-    - ...
+
+5개 EfficientNet Ensemble 사용
+
+⇒ 5개 sum 후 /5 수행
+
+with strategy.scope():
+    
+    models = []
+    
+    models0 = tf.keras.models.load_model(
+        '../input/siim-covid19-efnb7-train-study/model0.h5'
+    )
+    models1 = tf.keras.models.load_model(
+        '../input/siim-covid19-efnb7-train-study/model1.h5'
+    )
+    models2 = tf.keras.models.load_model(
+        '../input/siim-covid19-efnb7-train-study/model2.h5'
+    )
+    models3 = tf.keras.models.load_model(
+        '../input/siim-covid19-efnb7-train-study/model3.h5'
+    )
+    models4 = tf.keras.models.load_model(
+        '../input/siim-covid19-efnb7-train-study/model4.h5'
+    )
+    
+    models.append(models0)
+    models.append(models1)
+    models.append(models2)
+    models.append(models3)
+    models.append(models4)
+
+# 5개 모델 probs sum 후 평균으로 나눔 
+sub_df[label_cols] = sum([model.predict(dtest, verbose=1) for model in models]) / len(models)
 6. Metric
     - AUC
         - [https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/discussion/229637](https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/discussion/229637)
@@ -95,83 +130,8 @@
 
 - 하나의 모델을 갖고 원본 이미지와 수직 대칭 이미지에 대해서 예측을 추가로 수행 ([https://lv99.tistory.com/74](https://lv99.tistory.com/74))
 
-**Notebook 분석**
 
-- 0.598 ([https://www.kaggle.com/mjbk0417/siim-efficeintnet-studing/edit](https://www.kaggle.com/mjbk0417/siim-efficeintnet-studing/edit))
-    - **정리**
-        1. 512 x 512 image 사용 for EfficientNet **(train)**
-            
-            ⇒ [https://www.kaggle.com/h053473666/siimcovid19-512-img-png-600-study-png?select=image](https://www.kaggle.com/h053473666/siimcovid19-512-img-png-600-study-png?select=image)
-            
-            - **512 → 600 으로 resize 해서 학습**
-            
-            ```python
-            IMSIZE = (224, 240, 260, 300, 380, 456, 528, 600)
-            IMS = 7 # 600 
-            
-            decoder = build_decoder(with_labels=True, target_size=(IMSIZE[IMS], IMSIZE[IMS]), ext='png')
-            test_decoder = build_decoder(with_labels=False, target_size=(IMSIZE[IMS], IMSIZE[IMS]),ext='png')
-            ```
-            
-        2. Dicom to np.array **(Infer)**
-            - fix_monochrome : **True**
-            - resize : keep_ratio : **False**
-            
-        3. Augmentation
-            - tf.image.random_flip_left_right(img)
-            - tf.image.random_flip_up_down(img)
-            - GroupKFold(n_splits = 5)
-            
-        4. Classification Loss
-            - ...
-            - ...
-            
-        5. Layer
-            - **EfficientNet** + **(GlobalAveragePooling, Dense w/ softmax)**
-            
-            ```python
-            tf.keras.layers.GlobalAveragePooling2D(),
-            tf.keras.layers.Dense(n_labels, activation='softmax')
-            ```
-            
-        
-        6. Ensemble
-        
-        - 5개 EfficientNet Ensemble 사용
-            
-            ⇒ 5개 sum 후 /5 수행
-            
-        
-        ```python
-        with strategy.scope():
-            
-            models = []
-            
-            models0 = tf.keras.models.load_model(
-                '../input/siim-covid19-efnb7-train-study/model0.h5'
-            )
-            models1 = tf.keras.models.load_model(
-                '../input/siim-covid19-efnb7-train-study/model1.h5'
-            )
-            models2 = tf.keras.models.load_model(
-                '../input/siim-covid19-efnb7-train-study/model2.h5'
-            )
-            models3 = tf.keras.models.load_model(
-                '../input/siim-covid19-efnb7-train-study/model3.h5'
-            )
-            models4 = tf.keras.models.load_model(
-                '../input/siim-covid19-efnb7-train-study/model4.h5'
-            )
-            
-            models.append(models0)
-            models.append(models1)
-            models.append(models2)
-            models.append(models3)
-            models.append(models4)
-        
-        # 5개 모델 probs sum 후 평균으로 나눔 
-        sub_df[label_cols] = sum([model.predict(dtest, verbose=1) for model in models]) / len(models)
-        ```
+       
         
 
 [VinBigdata 1등 discussion ([https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/discussion/229724](https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/discussion/229724))](https://www.notion.so/VinBigdata-1-discussion-https-www-kaggle-com-c-vinbigdata-chest-xray-abnormalities-detection-dis-9d88d284fe4c45dc8ed91113ba78ee78)
