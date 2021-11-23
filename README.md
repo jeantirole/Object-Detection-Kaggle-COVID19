@@ -48,8 +48,10 @@
     - EfficientNet + (GlobalAveragePooling, Dense w/ softmax)
     
 5. Ensemble 
-    - 5개 EfficientNet Ensemble 사용
-    - output logit 값 평균 
+    - 5개 EfficientNet Ensemble 사용 => output logit 값 평균 
+    - YOLO Ensemble folds (folds 마다 다른모델)
+    - diverse models (different model each abnormal class) 
+    
 6. Metric
     - AUC
         - [https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/discussion/229637](https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/discussion/229637)
@@ -88,8 +90,13 @@
     - WBF
         - [https://www.kaggle.com/sreevishnudamodaran/vinbigdata-fusing-bboxes-coco-dataset](https://www.kaggle.com/sreevishnudamodaran/vinbigdata-fusing-bboxes-coco-dataset)
         - [https://www.kaggle.com/shonenkov/bayesian-optimization-wbf-efficientdet](https://www.kaggle.com/shonenkov/bayesian-optimization-wbf-efficientdet)
-        - 
+    - NMS
 
 10. Test Time Augmentation
+
+
+11. Other 
+ - Started with detectron2 model
+ - 
 
 - 하나의 모델을 갖고 원본 이미지와 수직 대칭 이미지에 대해서 예측을 추가로 수행 ([https://lv99.tistory.com/74](https://lv99.tistory.com/74))
