@@ -58,6 +58,7 @@
 
 ⇒ 5개 sum 후 /5 수행
 
+'''
 with strategy.scope():
     
     models = []
@@ -83,6 +84,7 @@ with strategy.scope():
     models.append(models2)
     models.append(models3)
     models.append(models4)
+'''
 
 # 5개 모델 probs sum 후 평균으로 나눔 
 sub_df[label_cols] = sum([model.predict(dtest, verbose=1) for model in models]) / len(models)
