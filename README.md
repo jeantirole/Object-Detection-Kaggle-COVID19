@@ -49,8 +49,8 @@
     - ...
     
 5. Ensemble 
-    - ...
-    - ...
+    - 5개 EfficientNet Ensemble 사용
+    - output logit 값 평균 
 6. Metric
     - AUC
         - [https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/discussion/229637](https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/discussion/229637)
