@@ -45,49 +45,12 @@
             
     
 4. Layer 
-    - **EfficientNet** + **(GlobalAveragePooling, Dense w/ softmax)**
-
-    ```python
-    tf.keras.layers.GlobalAveragePooling2D(),
-    tf.keras.layers.Dense(n_labels, activation='softmax')
-    ```
+    - ...
+    - ...
     
 5. Ensemble 
-
-5개 EfficientNet Ensemble 사용
-
-⇒ 5개 sum 후 /5 수행
-
-'''
-with strategy.scope():
-    
-    models = []
-    
-    models0 = tf.keras.models.load_model(
-        '../input/siim-covid19-efnb7-train-study/model0.h5'
-    )
-    models1 = tf.keras.models.load_model(
-        '../input/siim-covid19-efnb7-train-study/model1.h5'
-    )
-    models2 = tf.keras.models.load_model(
-        '../input/siim-covid19-efnb7-train-study/model2.h5'
-    )
-    models3 = tf.keras.models.load_model(
-        '../input/siim-covid19-efnb7-train-study/model3.h5'
-    )
-    models4 = tf.keras.models.load_model(
-        '../input/siim-covid19-efnb7-train-study/model4.h5'
-    )
-    
-    models.append(models0)
-    models.append(models1)
-    models.append(models2)
-    models.append(models3)
-    models.append(models4)
-'''
-
-# 5개 모델 probs sum 후 평균으로 나눔 
-sub_df[label_cols] = sum([model.predict(dtest, verbose=1) for model in models]) / len(models)
+    - ...
+    - ...
 6. Metric
     - AUC
         - [https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/discussion/229637](https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/discussion/229637)
@@ -131,9 +94,3 @@ sub_df[label_cols] = sum([model.predict(dtest, verbose=1) for model in models]) 
 10. Test Time Augmentation
 
 - 하나의 모델을 갖고 원본 이미지와 수직 대칭 이미지에 대해서 예측을 추가로 수행 ([https://lv99.tistory.com/74](https://lv99.tistory.com/74))
-
-
-       
-        
-
-[VinBigdata 1등 discussion ([https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/discussion/229724](https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/discussion/229724))](https://www.notion.so/VinBigdata-1-discussion-https-www-kaggle-com-c-vinbigdata-chest-xray-abnormalities-detection-dis-9d88d284fe4c45dc8ed91113ba78ee78)
