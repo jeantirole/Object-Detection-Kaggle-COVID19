@@ -94,9 +94,4 @@
 
 10. Test Time Augmentation
 
-
-11. Other 
- - Started with detectron2 model
- - 
-
-- 하나의 모델을 갖고 원본 이미지와 수직 대칭 이미지에 대해서 예측을 추가로 수행 ([https://lv99.tistory.com/74](https://lv99.tistory.com/74))
+    - 하나의 모델을 갖고 원본 이미지와 수직 대칭 이미지에 대해서 예측을 추가로 수행 ([https://lv99.tistory.com/74](https://lv99.tistory.com/74))
