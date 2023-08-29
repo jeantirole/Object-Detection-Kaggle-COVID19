@@ -34,7 +34,7 @@
 3. Loss 
     - auxiliary loss
         - [https://www.kaggle.com/c/siim-covid19-detection/discussion/240233](https://www.kaggle.com/c/siim-covid19-detection/discussion/240233)
-        - 0.617인 친구가 auxiliary loss + meta pseudo labeling 사용중
+        - auxiliary loss + meta pseudo labeling 사용중
             - 다른 competition pseuo labeling [https://www.kaggle.com/nvnnghia/yolov5-pseudo-labeling](https://www.kaggle.com/nvnnghia/yolov5-pseudo-labeling)
             
              
