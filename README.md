@@ -1,6 +1,20 @@
-# Object_Detection_Kaggle_COVID19
+# Overview
+- 주최사 : The Foundation for the Promotion of Health and Biomedical Research of Valencia Region, FISABIO
+- 플랫폼 : Kaggle
+- 대회명 : Kaggle SIIM-FISABIO-RSNA COVID-19 Detection
+- 대회일정 : 2021-05 ~ 2021-09
+- Link : https://www.kaggle.com/competitions/siim-covid19-detection/overview/timeline
+- 참가팀명 : BlackPink (4명)
 
-### 실험 point
+- 총참가자 : 1,305명
+- 최종순위 : 392위 (상위 30%)
+- 개발내용 :
+1. Validation 기법에 따른 성능비교
+2. EfficientDet, Yolo5 등 Detection 모델 앙상블 개발
+- 소스코드 Github Link : https://github.com/jeantirole/Object_Detection_Kaggle_COVID19
+
+
+# Experiments
 
 1. DICOM to png/jpg (np.array)
     - [https://www.kaggle.com/h053473666/siimcovid19-512-img-png-600-study-png?select=image](https://www.kaggle.com/h053473666/siimcovid19-512-img-png-600-study-png?select=image)
